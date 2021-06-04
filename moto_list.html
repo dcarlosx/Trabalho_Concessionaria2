@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Listagem de Motos
+{% endblock title %}
+
+{% block content %}
+<form method="get">
+    <input type="text" name="busca" placeholder="Buscar">
+    <button type="submit" class="btn btn-primary">
+      Buscar
+    </button>
+</form>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Venda</th>
+      <th>Cliente</th>
+      <th>Marca</th>
+      <th>Ano</th>
+      <th>Valor</th>
+      <th>Data</th>
+      <th>Ação</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for moto in lista %}
+    <tr>
+      <td>{{ moto.venda }}</td>
+      <td>{{ moto.cliente }}</td>
+      <td>{{ moto.marca }}</td>
+      <td>{{ moto.ano }}</td>
+      <td>{{ moto.valor}}</td>
+      <td>{{ moto.data_cadastro}}</td>
+
+      <td>
+        <a href="{% url 'editar_moto' pk=moto.pk %}">
+      <i class="material-icons">mode_edit</i>
+        </a>
+        <a href="{% url 'remover_moto' pk=moto.pk %}">
+      <i class="material-icons">delete</i>
+        </a>
+      </td>
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a href="{% url 'cadastrar_moto' %}" class="btn btn-primary">
+    Cadastrar
+</a>
+
+{% endblock content %}
+
